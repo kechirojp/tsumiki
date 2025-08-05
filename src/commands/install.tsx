@@ -119,21 +119,22 @@ const InstallComponent: React.FC<InstallComponentProps> = ({ target: cliTarget }
       <Box flexDirection="column">
         <Text color="green">✅ インストールが完了しました!</Text>
         <Newline />
-        <Text>ターゲット: {resolvedTarget}</Text> {/* Display the resolved target */}
+        <Text>ターゲット: {resolvedTarget}</Text>
         <Newline />
         <Text>コピーされたファイル ({copiedFiles.length}個):</Text>
         {copiedFiles.map((file) => (
           <Text key={file} color="gray">
-             • {file}
+            {"  • " + file}
           </Text>
         ))}
         <Newline />
         <Text color="cyan">
-          {resolvedTarget === 'claude' ? 'Claude Code' : resolvedTarget === 'qwen' ? 'Qwen Code' : resolvedTarget} で以下のようにコマンドを使用できます:
+          {resolvedTarget === 'claude' ? 'Claude Code' : resolvedTarget === 'qwen' ? 'Qwen Code' : resolvedTarget}
         </Text>
-        <Text color="white"> /tdd-requirements</Text>
-        <Text color="white"> /kairo-design</Text>
-        <Text color="white"> ...</Text>
+        <Text color="cyan">で以下のようにコマンドを使用できます:</Text>
+        <Text color="white">{"/tdd-requirements"}</Text>
+        <Text color="white">{"/kairo-design"}</Text>
+        <Text color="white">{"..."}</Text>
       </Box>
     );
   }

@@ -164,12 +164,12 @@ const UninstallComponent: React.FC<UninstallComponentProps> = ({ target: cliTarg
       <Box flexDirection="column">
         <Text color="green">✅ アンインストールが完了しました!</Text>
         <Newline />
-        <Text>ターゲット: {resolvedTarget}</Text> {/* Display the resolved target */}
+        <Text>ターゲット: {resolvedTarget}</Text>
         <Newline />
         <Text>削除されたファイル ({removedFiles.length}個):</Text>
         {removedFiles.map((file) => (
           <Text key={file} color="gray">
-             • {file}
+            {"  • " + file}
           </Text>
         ))}
         <Newline />
