@@ -1,0 +1,20 @@
+new_version = get_version_without_v_prefix($ARGUMENTS) # 例: 1.0.0
+new_version_with_v_prefix = get_version_with_v_prefix($ARGUMENTS) # 例: v1.0.0
+
+new_versionの指定がない場合、patchバージョンを現在のバージョンから+1した値をnew_version,new_version_with_v_prefixに設定します。
+
+1. 現在 main ブランチにいることを確認します。main ブランチでない場合は、この操作を中止します。
+2. `git pull` を実行します。
+3. `git checkout -b release/{new_version_with_v_prefix}` を実行します。
+4. `src/cli/index.ts` 内のバージョンを更新します。その後、`git add` と `git commit` を実行します。
+5. `pnpm version {new_version} --no-git-tag-version` でバージョンを更新します。
+6. `package.json` が変更されるため、`git commit` と `git push` を実行します。
+7. `gh pr create` と `gh pr merge` を実行して、リリースブランチを main ブランチにマージします。
+8. 前のバージョンタグと現在のコミット間のコード変更を比較して、リリース説明を準備します。
+  - 英語で記述します。
+  - 機密情報は含めません。
+  - `What's Changed`、`Contributors`、`Full Changelog` のセクションが必要です。
+  - `./tmp/release-notes.md` をリリースノートとして使用します。
+9. 予防措置として、リリース内容に非公開にすべき情報が含まれていないことを確認します。
+10. `gh release create {new_version_with_v_prefix} --title {new_version_with_v_prefix} --notes-file ./tmp/release-notes.md ...` コマンドを使用して、`github.com/classmethod/tsumiki` リポジトリでタイトルとタグの両方を new_version_with_v_prefix に設定し、ステップ4の内容を説明として使用してリリースを作成します。
+11. main ブランチに戻ります。

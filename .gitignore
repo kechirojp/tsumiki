@@ -1,0 +1,38 @@
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.iml
+
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Dependencies
+node_modules/
+.pnpm-store/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build output
+dist/
+*.tsbuildinfo
+
+# Claude Code
+.claude/settings.local.json
+
+# Qwen3-Coder
+Qwen3-Coder-main/
+qwen_code_adaptation_notes.md
+.env
+
+# Others
+tmp/

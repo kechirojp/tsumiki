@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    name: Code Quality & Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.13.1
+
+      - name: Install dependencies
+        run: pnpm install --ignore-scripts
+
+      - name: Check no files generated after install
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Error: Files were generated or modified after pnpm install"
+            git status --porcelain
+            exit 1
+          fi
+
+      - name: Run check
+        run: pnpm check
+
+      - name: Run secretlint
+        run: pnpm secretlint
+
+      - name: Run typecheck
+        run: pnpm typecheck
+
+      - name: Build project
+        run: pnpm build

@@ -1,0 +1,81 @@
+{
+  "name": "tsumiki",
+  "private": false,
+  "version": "0.0.6",
+  "description": "A CLI tool for installing Tsumiki commands for various Coder environments (Claude Coder, Qwen3 Coder, etc.)",
+  "keywords": [
+    "cli",
+    "tsumiki",
+    "qwen",
+    "qwen-code",
+    "ai"
+  ],
+  "homepage": "https://github.com/classmethod/tsumiki#readme",
+  "bugs": {
+    "url": "https://github.com/classmethod/tsumiki/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/classmethod/tsumiki.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "classmethod"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/cli.d.ts",
+      "import": "./dist/cli.js",
+      "require": "./dist/cli.cjs"
+    }
+  },
+  "main": "./dist/cli.cjs",
+  "module": "./dist/cli.js",
+  "types": "./dist/cli.d.ts",
+  "bin": {
+    "tsumiki": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && mkdirp dist/commands && copyfiles -u 1 commands/*.md commands/*.sh dist/commands/ && tsup",
+    "build:run": "pnpm build && node dist/cli.js",
+    "check": "biome check src",
+    "fix": "biome check src --write",
+    "prepare": "simple-git-hooks",
+    "secretlint": "secretlint --secretlintignore .gitignore **/*",
+    "typecheck": "tsgo --noEmit"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm secretlint && pnpm typecheck && pnpm fix"
+  },
+  "dependencies": {
+    "commander": "14.0.0",
+    "fs-extra": "11.3.0",
+    "ink": "6.1.0",
+    "react": "19.1.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.1.3",
+    "@secretlint/secretlint-rule-preset-recommend": "10.2.1",
+    "@tsconfig/node24": "24.0.1",
+    "@types/fs-extra": "11.0.4",
+    "@types/node": "24.1.0",
+    "@types/react": "19.1.9",
+    "@typescript/native-preview": "7.0.0-dev.20250729.2",
+    "copyfiles": "2.4.1",
+    "mkdirp": "3.0.1",
+    "rimraf": "6.0.1",
+    "secretlint": "10.2.1",
+    "simple-git-hooks": "2.13.0",
+    "tsup": "8.5.0",
+    "tsx": "4.20.3",
+    "typescript": "5.8.3"
+  },
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
