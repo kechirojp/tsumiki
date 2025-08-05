@@ -1,5 +1,5 @@
 import * as path from "node:path";
-import { loadConfig, type Config } from "./config.js";
+import { type Config, loadConfig } from "./config.js";
 
 /**
  * ターゲットとなるCoder環境を取得します。
@@ -7,7 +7,9 @@ import { loadConfig, type Config } from "./config.js";
  * @param cliTarget コマンドラインオプションで指定されたターゲット
  * @returns ターゲットとなるCoder環境 ('claude' or 'qwen')
  */
-export async function getTarget(cliTarget: string | undefined): Promise<string> {
+export async function getTarget(
+  cliTarget: string | undefined,
+): Promise<string> {
   // 1. コマンドラインオプションが指定されていればそれを使用
   if (cliTarget) {
     return cliTarget;
@@ -40,7 +42,11 @@ export function getTargetDir(target: string): string {
       // ここでは、指定された名前をそのままディレクトリ名として使用 (例: '.mycoder/commands')
       // ただし、'..' や '/' などの不正な文字列は避けるべき
       // 簡易的な検証を追加
-      if (target.includes("..") || target.includes("/") || target.includes("\\")) {
+      if (
+        target.includes("..") ||
+        target.includes("/") ||
+        target.includes("\\")
+      ) {
         throw new Error(`Invalid target name: ${target}`);
       }
       return path.join(currentDir, `.${target}`, "commands");

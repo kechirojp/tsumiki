@@ -9,19 +9,25 @@ const program = new Command();
 
 program
   .name("tsumiki")
-  .description("CLI tool for installing Tsumiki commands for various Coder environments")
+  .description(
+    "CLI tool for installing Tsumiki commands for various Coder environments",
+  )
   .version("1.0.0");
 
 program
   .command("install")
-  .description("Install Tsumiki command templates to the specified Coder environment")
-  .option('-t, --target <coder>', 'Target Coder environment (claude or qwen)') // Remove default value
+  .description(
+    "Install Tsumiki command templates to the specified Coder environment",
+  )
+  .option("-t, --target <coder>", "Target Coder environment (claude or qwen)") // Remove default value
   .action((options) => installCommand(options.target));
 
 program
   .command("uninstall")
-  .description("Uninstall Tsumiki command templates from the specified Coder environment")
-  .option('-t, --target <coder>', 'Target Coder environment (claude or qwen)') // Remove default value
+  .description(
+    "Uninstall Tsumiki command templates from the specified Coder environment",
+  )
+  .option("-t, --target <coder>", "Target Coder environment (claude or qwen)") // Remove default value
   .action((options) => uninstallCommand(options.target));
 
 program

@@ -17,7 +17,10 @@ interface UninstallComponentProps {
   target?: string; // Receive target as a prop
 }
 
-const UninstallComponent: React.FC<UninstallComponentProps> = ({ target: cliTarget }) => { // Accept target prop
+const UninstallComponent: React.FC<UninstallComponentProps> = ({
+  target: cliTarget,
+}) => {
+  // Accept target prop
   const [status, setStatus] = useState<UninstallStatus>("starting");
   const [removedFiles, setRemovedFiles] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -132,7 +135,8 @@ const UninstallComponent: React.FC<UninstallComponentProps> = ({ target: cliTarg
     return (
       <Box flexDirection="column">
         <Text color="yellow">
-          ⚠️ {getTargetDir(resolvedTarget).replace(process.cwd(), '').slice(1)} ディレクトリが見つかりません
+          ⚠️ {getTargetDir(resolvedTarget).replace(process.cwd(), "").slice(1)}{" "}
+          ディレクトリが見つかりません
         </Text>
         <Text color="gray">Tsumikiはインストールされていないようです。</Text>
       </Box>
@@ -156,7 +160,7 @@ const UninstallComponent: React.FC<UninstallComponentProps> = ({ target: cliTarg
           <Text color="gray">
             Tsumikiのコマンドはインストールされていないようです。
           </Text>
-      </Box>
+        </Box>
       );
     }
 
@@ -174,7 +178,13 @@ const UninstallComponent: React.FC<UninstallComponentProps> = ({ target: cliTarg
         ))}
         <Newline />
         <Text color="cyan">
-          Tsumikiの{resolvedTarget === 'claude' ? 'Claude Code' : resolvedTarget === 'qwen' ? 'Qwen Code' : resolvedTarget}コマンドテンプレートが削除されました。
+          Tsumikiの
+          {resolvedTarget === "claude"
+            ? "Claude Code"
+            : resolvedTarget === "qwen"
+              ? "Qwen Code"
+              : resolvedTarget}
+          コマンドテンプレートが削除されました。
         </Text>
       </Box>
     );

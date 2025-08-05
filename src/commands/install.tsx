@@ -16,7 +16,10 @@ interface InstallComponentProps {
   target?: string; // Receive target as a prop
 }
 
-const InstallComponent: React.FC<InstallComponentProps> = ({ target: cliTarget }) => { // Accept target prop
+const InstallComponent: React.FC<InstallComponentProps> = ({
+  target: cliTarget,
+}) => {
+  // Accept target prop
   const [status, setStatus] = useState<InstallStatus>("starting");
   const [copiedFiles, setCopiedFiles] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -129,7 +132,11 @@ const InstallComponent: React.FC<InstallComponentProps> = ({ target: cliTarget }
         ))}
         <Newline />
         <Text color="cyan">
-          {resolvedTarget === 'claude' ? 'Claude Code' : resolvedTarget === 'qwen' ? 'Qwen Code' : resolvedTarget}
+          {resolvedTarget === "claude"
+            ? "Claude Code"
+            : resolvedTarget === "qwen"
+              ? "Qwen Code"
+              : resolvedTarget}
         </Text>
         <Text color="cyan">で以下のようにコマンドを使用できます:</Text>
         <Text color="white">{"/tdd-requirements"}</Text>
